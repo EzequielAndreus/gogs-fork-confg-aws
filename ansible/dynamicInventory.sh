@@ -3,7 +3,10 @@
 # Go to the Terraform folder
 cd infra || exit 1
 
-terraform init -reconfigure -backend=true
+if ! terraform init -reconfigure -backend=true; then
+  echo "Terraform initialization failed. Aborting." >&2
+  exit 1
+fi
 
 # Get EC2 public IP from Terraform
 EC2_IP=$(terraform output -raw ec2_public_ip)
