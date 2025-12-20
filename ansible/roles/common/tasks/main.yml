@@ -1,5 +1,5 @@
 - name: Install basic packages
-  package:
+  ansible.builtin.package:
     name:
       - git
       - curl

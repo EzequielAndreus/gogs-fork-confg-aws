@@ -1,5 +1,5 @@
 - name: Create Gogs root directory
-  file:
+  ansible.builtin.file:
     path: "{{ gogs_root_dir }}"
     state: directory
     owner: ec2-user
