@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: gogs-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: {{ gogs_postgres_db }}
+      POSTGRES_USER: {{ gogs_postgres_user }}
+      POSTGRES_PASSWORD: {{ gogs_postgres_password }}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  gogs:
+    image: gogs/gogs:latest
+    container_name: gogs
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "{{ gogs_http_port }}:3000"
+      - "{{ gogs_ssh_port }}:22"
+    volumes:
+      - gogs-data:/data
+    environment:
+      GOGS_DATABASE_TYPE: postgres
+      GOGS_DATABASE_HOST: postgres:5432
+      GOGS_DATABASE_NAME: {{ postgres_db }}
+      GOGS_DATABASE_USER: {{ postgres_user }}
+      GOGS_DATABASE_PASSWORD: {{ postgres_password }}
+
+volumes:
+  gogs-data:
+  postgres-data:
