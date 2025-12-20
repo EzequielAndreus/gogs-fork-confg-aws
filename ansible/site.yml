@@ -1,5 +1,7 @@
-- hosts: gogs_server
+- name: Deploy Gogs with Docker Compose
+  hosts: gogs_server
   become: true
+
   roles:
     - common
     - docker
