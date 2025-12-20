@@ -1,0 +1,8 @@
+gogs_root_dir: /opt/gogs
+
+gogs_http_port: 3000
+gogs_ssh_port: 10022
+
+postgres_db: gogs
+postgres_user: gogs
+postgres_password: gogs_password

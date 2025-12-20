@@ -1,0 +1,6 @@
+- hosts: gogs_server
+  become: true
+  roles:
+    - common
+    - docker
+    - gogs

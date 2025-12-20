@@ -1,0 +1,20 @@
+- name: Create Gogs root directory
+  file:
+    path: "{{ gogs_root_dir }}"
+    state: directory
+    owner: ec2-user
+    group: ec2-user
+    mode: "0755"
+
+- name: Render docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ gogs_root_dir }}/docker-compose.yml"
+    owner: ec2-user
+    group: ec2-user
+    mode: "0644"
+
+- name: Pull and start Gogs stack
+  command: docker-compose up -d
+  args:
+    chdir: "{{ gogs_root_dir }}"
