@@ -6,30 +6,35 @@ This repository contains **Ansible playbooks and roles** for automating the setu
 
 ## Project Structure
 
+<pre>
+```
 ansible/
-├── dynamicInventory.sh # Script for dynamic inventory
-├── inventory.ini # Static inventory file
-├── roles/ # Ansible roles
-│ ├── common/ # Common setup tasks (users, packages, etc.)
-│ │ └── tasks/
-│ │ └── main.yml
-│ ├── docker/ # Install and configure Docker
-│ │ └── tasks/
-│ │ └── main.yml
-│ ├── gogs/ # Setup Gogs (Git service)
-│ │ ├── defaults/
-│ │ │ └── main.yml
-│ │ ├── tasks/
-│ │ │ └── main.yml
-│ │ └── templates/
-│ │ └── docker-compose.yml.j2
-│ └── splunk_forwarder/ # Setup Splunk Forwarder
-│ ├── defaults/
-│ │ └── main.yml
-│ └── tasks/
-│ └── main.yml
-├── site.yml # Main playbook
-└── README.md # This file
+├── dynamicInventory.sh
+├── inventory.ini
+├── roles/
+│   ├── common/
+│   │   └── tasks/
+│   │       └── main.yml
+│   ├── docker/
+│   │   └── tasks/
+│   │       └── main.yml
+│   ├── gogs/
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   └── templates/
+│   │       └── docker-compose.yml.j2
+│   └── splunk_forwarder/
+│       ├── defaults/
+│       │   └── main.yml
+│       └── tasks/
+│           └── main.yml
+├── site.yml
+└── README.md
+```
+</pre>
+
 
 ## Requirements
 
