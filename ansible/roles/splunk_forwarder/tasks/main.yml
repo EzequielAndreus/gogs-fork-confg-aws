@@ -6,40 +6,40 @@
 
 - name: Download Splunk Forwarder deb
   ansible.builtin.get_url:
-    url: "{{ splunk_download_url }}"
-    dest: "/tmp/{{ splunk_package }}"
+    url: "{{ splunk_forwarder_download_url }}"
+    dest: "/tmp/{{ splunk_forwarder_package }}"
     mode: "0644"
 
 - name: Install Splunk Forwarder
   ansible.builtin.apt:
-    deb: "/tmp/{{ splunk_package }}"
+    deb: "/tmp/{{ splunk_forwarder_package }}"
     state: present
 
 - name: Start Splunk Forwarder and accept license
   ansible.builtin.command:
-    cmd: "{{ splunk_install_dir }}/bin/splunk start --accept-license --answer-yes --no-prompt"
-  register: splunk_start
-  changed_when: "'Starting splunkd' in splunk_start.stdout"
+    cmd: "{{ splunk_forwarder_install_dir }}/bin/splunk start --accept-license --answer-yes --no-prompt"
+  register: splunk_forwarder_start
+  changed_when: "'Starting splunkd' in splunk_forwarder_start.stdout"
 
 - name: Enable Splunk Forwarder at boot
   ansible.builtin.command:
-    cmd: "{{ splunk_install_dir }}/bin/splunk enable boot-start --accept-license"
+    cmd: "{{ splunk_forwarder_install_dir }}/bin/splunk enable boot-start --accept-license"
   args:
     creates: /etc/systemd/system/SplunkForwarder.service
 
 - name: Configure forwarding (outputs.conf)
   ansible.builtin.copy:
-    dest: "{{ splunk_install_dir }}/etc/system/local/outputs.conf"
+    dest: "{{ splunk_forwarder_install_dir }}/etc/system/local/outputs.conf"
     content: |
       [tcpout]
       defaultGroup = default-autolb-group
 
       [tcpout:default-autolb-group]
-      server = {{ splunk_indexer }}:{{ splunk_receiver_port }}
+      server = {{ splunk_forwarder_indexer }}:{{ splunk_forwarder_receiver_port }}
     owner: splunk
     group: splunk
     mode: "0644"
 
 - name: Restart Splunk Forwarder
   ansible.builtin.command:
-    cmd: "{{ splunk_install_dir }}/bin/splunk restart"
+    cmd: "{{ splunk_forwarder_install_dir }}/bin/splunk restart"
