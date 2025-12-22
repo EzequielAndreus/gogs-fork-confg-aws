@@ -6,3 +6,9 @@
     - common
     - docker
     - gogs
+
+- name: Install Splunk Forwarder
+  hosts: splunk_forwarders
+  become: true
+  roles:
+    - splunk_forwarder

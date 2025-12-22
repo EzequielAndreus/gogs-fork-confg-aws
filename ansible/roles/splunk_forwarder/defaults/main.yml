@@ -1,0 +1,11 @@
+splunk_forwarder_version: "10.0.2"
+splunk_forwarder_build: "e2d18b4767e9"
+
+splunk_forwarder_package: "splunkforwarder-{{ splunk_version }}-{{ splunk_build }}-linux-amd64.deb"
+splunk_forwarder_download_url: "https://download.splunk.com/products/universalforwarder/releases/{{ splunk_version }}/linux/{{ splunk_package }}"
+
+splunk_forwarder_install_dir: "/opt/splunkforwarder"
+
+# Indexer / receiver
+splunk_forwarder_indexer: "172.31.3.251"
+splunk_forwarder_receiver_port: 9997
